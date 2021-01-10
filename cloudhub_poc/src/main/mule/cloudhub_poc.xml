@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a6340cd3-5eba-4960-b4bd-c53cf31b6d1b" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="b077728e-46c4-40bf-8d66-db6d2f1c34c8" >
+		<http:request-connection host="dummy.restapiexample.com" />
+	</http:request-config>
+	<flow name="cloudhub_pocFlow" doc:id="ebea9107-06a4-4ca5-8541-1d2cca341ee4" >
+		<http:listener doc:name="Listener" doc:id="6bba3824-f3bf-488f-b251-c95222d9c8d2" config-ref="HTTP_Listener_config" path="/employees"/>
+		<http:request method="GET" doc:name="GET_EMPLOYEE_REST_WS" doc:id="f0d9e37e-1715-475f-b36a-ba53eb2768d1" config-ref="HTTP_Request_configuration" path="/api/v1/employees"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ee99228c-085e-4134-8776-22ebb8aa3aa7" message="REST WEB SERVICE INVOKED"/>
+	</flow>
+</mule>
